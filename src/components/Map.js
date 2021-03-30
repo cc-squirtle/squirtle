@@ -248,7 +248,7 @@ export default function Map(props) {
 
     function handleClicked(tap) {
         console.log("tap clicked", tap);
-        props.setMyTaps([...props.myTaps, tap])
+        props.setMyTaps(prevTaps => [...prevTaps, tap]);
     }
 
     const MyMap = withGoogleMap((props) => (

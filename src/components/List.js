@@ -18,16 +18,14 @@ const dummy = [{
 }
 ]
 
-export default function List() {
+export default function List(props) {
     return (
         <div>
             <h2>List</h2>
             <button>
                 save
             </button>
-            {dummy.map((e) => <ListItem spot={e}/>)} 
-            
-            
+            {props.myTaps.length && props.myTaps.map((tap) => <ListItem tap={tap}/>)} 
         </div>
     )
 }
