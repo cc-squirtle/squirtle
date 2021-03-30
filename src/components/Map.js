@@ -42,10 +42,11 @@ const MyMap = withGoogleMap((props) => (
 
 export default function Map() {
     return (
-        <MyMap
-            containerElement={<div style={{ height: `500px`, width: `900px` }}/>}
-            mapElement={<div style={{ height: `100%` }} />}
-            onMapLoad={()=> console.log('map is loaded')}
-        />
+            <MyMap
+                className="map"
+                containerElement={<div className="map-container" />}
+                mapElement={<div className="map" />}
+                onMapLoad={()=> console.log('map is loaded')}
+            />
     )
 }
