@@ -51,7 +51,5 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
-  },
-  "proxy": "https://my-mizu-dev2-gen8n.ondigitalocean.app"
-
+  }
 }
