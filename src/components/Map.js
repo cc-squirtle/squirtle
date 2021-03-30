@@ -1,5 +1,10 @@
-import React from 'react';
+import React  from 'react';
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import axios from 'axios'
+import { useState } from 'react';
+import cors from 'cors'
+
+
 
 const dataTable = [
     {
@@ -41,6 +46,28 @@ const MyMap = withGoogleMap((props) => (
 ));
 
 export default function Map() {
+    const [taps, setTaps] = useState([])
+    const dummyLocation = {
+        c1: "35.671812626599866",
+        c2: "139.73655447363853",
+        c3: "35.64245244856602",
+        c4: "139.75432142615318"
+    }
+    let config = {
+        method: 'get',
+        url: 'https://my-mizu-dev2-gen8n.ondigitalocean.app/dev-api/search/area?c1=35.671812626599866&c2=139.73655447363853&c3=35.64245244856602&c4=139.75432142615318',
+        headers: { 
+          'Authorization': 'Bearer 1|qRCvaTxpPdSaD7JS5UDLY1EOjwYn9du9aqaa8gaW', 
+          'Cookie': '__cfduid=d7b2c60129a99d627016e615c3a3989371617092346'
+        }
+      };
+      async function axiosLocation() {
+          const result = await axios(config)
+          console.log(result);
+          console.log(result.data);
+      }
+      axiosLocation();
+
     return (
             <MyMap
                 className="map"
