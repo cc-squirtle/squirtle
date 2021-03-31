@@ -265,6 +265,10 @@ export default function Map(props) {
         props.setMyTaps(prevTaps => [...prevTaps, tap]);
     }
 
+    useEffect(()=> {
+        getMapView(props.center);
+    }, [props.center])
+
     const MyMap = withGoogleMap((props) => (
         <GoogleMap
             defaultZoom={5}
