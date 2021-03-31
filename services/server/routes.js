@@ -24,6 +24,40 @@ routes.get('/geo', async (req, res) => {
   res.json(result.data);
 });
 
+// FOR MyMizu / Pass axios request by query param
+routes.get('/mymizu', async (req, res) => {
+  console.log(
+    'mymizu api called. req.query.c:',
+    req.query.c1,
+    req.query.c2,
+    req.query.c3,
+    req.query.c4
+  );
+
+  if (
+    req.query.c1 === undefined ||
+    req.query.c2 === undefined ||
+    req.query.c3 === undefined ||
+    req.query.c4 === undefined
+  ) {
+    console.error('some c missing!', err);
+    res.sendStatus(400);
+  }
+
+  let config = {
+    method: 'get',
+    url: `https://my-mizu-dev2-gen8n.ondigitalocean.app/dev-api/search/area?c1=${req.query.c1}&c2=${req.query.c2}&c3=${req.query.c3}&c4=${req.query.c4}`,
+    headers: {
+      Authorization: 'Bearer 1|qRCvaTxpPdSaD7JS5UDLY1EOjwYn9du9aqaa8gaW',
+      Cookie: '__cfduid=d0ed2ee922756fedb09c99176b1d040261617159177',
+    },
+  };
+
+  const result = await axios(config);
+  console.log(result.data);
+  res.json(result.data);
+});
+
 // Get all notes
 routes.get('/api/notes', async (request, response) => {
   const result = await db('notes').select('*').orderBy('title');
