@@ -24,6 +24,10 @@ export default function List(props) {
         // API call to insert list to db...
     }
 
+    function handleDelete(id) {
+        props.setMyTaps(props.myTaps.filter(tap => tap.id !== id));
+    }
+
     return (
         <div>
             <h2>List</h2>
@@ -31,7 +35,7 @@ export default function List(props) {
             onClick={handleSave}>
                 save
             </button>
-            {props.myTaps.length && props.myTaps.map((tap) => <ListItem tap={tap} />)} 
+            {props.myTaps.length && props.myTaps.map((tap) => <ListItem tap={tap} handleDelete={handleDelete} />)} 
         </div>
     )
 }
