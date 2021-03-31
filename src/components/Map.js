@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 const axios = require('axios');
 
-const dataTable = [
+const defaultTable = [
     {
         id: 47311,
         name: 'Roppongi station',
@@ -303,21 +303,20 @@ function calcZoom(mapView) {
             ? 11
             : kilo > 12
             ? 12
-            : kilo > 6
+            : kilo > 5
             ? 13
-            : kilo > 3
+            : kilo > 2
             ? 14
-            : kilo > 1.5
-            ? 15
             : kilo > 0.75
-            ? 16
-            : 17;
+            ? 15
+            : 16;
 
     return level;
 }
 
 export default function Map(props) {
     const [mapView, setMapView] = useState(defaultMapView);
+    const [taps, setTaps] = useState(defaultTable);
 
     async function getMapView(center) {
         try {
@@ -353,6 +352,41 @@ export default function Map(props) {
         }
     }, [props.center]);
 
+    async function getTaps() {
+        if (mapView === '' || mapView === undefined || !mapView) {
+            console.log(
+                'getTaps called but mapView is falsy. mapView: ',
+                mapView
+            );
+            return;
+        }
+        console.log(
+            'mapView.viewport called. mapView.geometry.viewport:',
+            mapView.geometry.viewport
+        );
+        const data = await axios.get(
+            `/mymizu?c1=${mapView.geometry.viewport.northeast.lat}&c2=${mapView.geometry.viewport.southwest.lng}&c3=${mapView.geometry.viewport.southwest.lat}&c4=${mapView.geometry.viewport.northeast.lng}`
+        );
+        console.log(data.data);
+        if (data.data.count === 0) {
+            return;
+        }
+        return data.data.taps;
+    }
+
+    useEffect(async () => {
+        if (props.center !== '') {
+            const result = await getTaps();
+            console.log(result);
+            // if (!result) {
+            //     console.log('return called');
+            //     return;
+            // }
+
+            setTaps(result);
+        }
+    }, [mapView]);
+
     function handleClicked(tap) {
         console.log('tap clicked', tap);
         props.setMyTaps((prevTaps) => [...prevTaps, tap]);
@@ -360,7 +394,7 @@ export default function Map(props) {
 
     const MyMap = withGoogleMap((props) => (
         <GoogleMap center={mapView.geometry.location} zoom={calcZoom(mapView)}>
-            {dataTable.map((tap) => (
+            {taps.map((tap) => (
                 <Marker
                     key={tap.id}
                     id={tap.id}
