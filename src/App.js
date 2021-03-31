@@ -1,21 +1,27 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import './App.css';
-import Navbar from './components/Navbar';
+import Navbar　from './components/Navbar';
 import Map from './components/Map';
 import List from './components/List';
 
 function App() {
+
+  const [center, setCenter] = useState("日本");
   const [myTaps, setMyTaps] = useState([]);
 
   useEffect(()=> {
-    console.log("tap list", myTaps)
-  }, [myTaps]);
+    console.log("New center ", center);
+  }, [center])
+  
+    useEffect(()=> {
+      console.log("tap list", myTaps)
+    }, [myTaps]);
 
   return (
     <div className="App">
-      <Navbar />
-      <Map setMyTaps={setMyTaps} />
-      <List myTaps={myTaps} setMyTaps={setMyTaps}/>
+      <Navbar setCenter = { setCenter } />
+      <Map setMyTaps={setMyTaps}  center={ center } />
+      <List myTaps={myTaps} setMyTaps={setMyTaps} />
     </div>
   );
 }
