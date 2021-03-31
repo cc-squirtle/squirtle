@@ -1,12 +1,36 @@
 .App {
   text-align: center;
 }
+/* .logo {
+  max-width:;
+  max-height: ;
+} */
 
 .map-container {
   height: 500px;
-  width: 900px;
+  width: 100%;
 }
 
 .map {
   height: 100%;
+}
+
+.taps-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.tap-card {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  width: 300px;
+  margin: 1%;
+}
+
+.tap-card:hover {
+  border: solid orange 2px;
+}
+
+.bold-text {
+  font-weight: 700;
 }

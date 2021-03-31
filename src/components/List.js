@@ -35,7 +35,9 @@ export default function List(props) {
             onClick={handleSave}>
                 save
             </button>
-            {props.myTaps.length && props.myTaps.map((tap) => <ListItem tap={tap} handleDelete={handleDelete} />)} 
+            <div className="taps-list">
+                {props.myTaps.length && props.myTaps.map((tap) => <ListItem tap={tap} handleDelete={handleDelete} />)} 
+            </div>
         </div>
     )
 }
