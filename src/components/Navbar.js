@@ -1,5 +1,6 @@
 import React from 'react'
-import logo from '../mymizu_logo.png'
+import { Button } from 'react-bootstrap';
+import logo from '../mymizu_white.png'
 
 export default function Navbar(props) {
 
@@ -9,11 +10,11 @@ export default function Navbar(props) {
     }
 
     return (
-        <div>
-            <img className = "logo" src = { logo } alt = "logo"/>
-            <form onSubmit = { handleClick }>
+        <div className='navbar'>
+            <img className="logo" src = { logo } alt = "logo"/>
+            <form className="search-form" onSubmit = { handleClick }>
                 <input name="centerPoint" type = "text"/>
-                <button type ="submit">SEARCH</button>
+                <Button type ="submit">Search</Button>
             </form>
         </div>
     )
