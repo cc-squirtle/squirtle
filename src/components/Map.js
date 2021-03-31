@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 
 const dataTable = [
@@ -245,6 +245,7 @@ function handleMouseOver(event) {
 
 
 export default function Map(props) {
+    const [markers, setMarkers] = useState(dataTable);
 
     function handleClicked(tap) {
         console.log("tap clicked", tap);
@@ -256,7 +257,7 @@ export default function Map(props) {
             defaultZoom={5}
             defaultCenter={{ lat: 38.0947841436263, lng: 139.86262510034172 }} 
         >
-            {dataTable.map((tap) => (
+            {markers.map((tap) => (
                 <Marker
                     key={tap.id}
                     id={tap.id}

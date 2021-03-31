@@ -24,6 +24,7 @@ routes.get('/geo', async (req, res) => {
   res.json(result.data);
 });
 
+
 // FOR MyMizu / Pass axios request by query param
 routes.get('/mymizu', async (req, res) => {
   console.log(
@@ -58,88 +59,18 @@ routes.get('/mymizu', async (req, res) => {
   res.json(result.data);
 });
 
-// Get all notes
-routes.get('/api/notes', async (request, response) => {
-  const result = await db('notes').select('*').orderBy('title');
+// Get all taps
+routes.get('/api/mytaps', async (request, response) => {
+  const result = await db('taps').select().orderBy('mymizu_id');
   response.send(result);
 });
 
-// Get single note
-routes.get('/api/notes/:id', async (request, response) => {
-  const result = await db('notes').select('*').where({ id: request.params.id });
-  response.send(result);
-});
-
-// Create a note
-routes.post('/api/notes', async (request, response) => {
-  const newNote = {
-    title: request.body.title,
-    note: request.body.note,
-  };
-  const result = await db('notes').insert(newNote).returning('*');
-  response.send(result);
-});
-
-// Update a note
-routes.put('/api/notes/:id', async (request, response) => {
-  const result = await db('notes')
-    .update({
-      title: request.body.title,
-      note: request.body.note,
-    })
-    .where({ id: request.params.id })
-    .returning('*');
-  response.send(result);
-});
-
-// Delete a note
-routes.delete('/api/notes/:id', async (request, response) => {
-  const result = await db('notes')
-    .where({ id: request.params.id })
-    .del()
-    .returning('*');
+// renew taps
+routes.post('/api/mytaps', async (request, response) => {
+  let result = await db('taps').del();
+  result = await db('taps').insert(request.body);
+  console.log(result);
   response.send(result);
 });
 
 module.exports = routes;
-
-// // FOR GEO / Pass axios request by query param
-// routes.get('/geo', async (req, res) => {
-//     console.log('req.query.url', req.query.url, 'req.query.key', req.query.key);
-
-//     if (
-//       req.query.url === '' ||
-//       req.query.url === undefined ||
-//       req.query.url === null
-//     ) {
-//       console.error('Error loading locations!', err);
-//       res.sendStatus(400);
-//     }
-
-//     let config = null;
-
-//     if (
-//       req.query.header !== '' ||
-//       req.query.header !== undefined ||
-//       req.query.header !== null
-//     ) {
-//       config = {
-//         method: 'get',
-//         url: req.query.url,
-//       };
-//     } else {
-//       config = {
-//         method: 'get',
-//         url: req.query.url,
-//         header: req.query.header.json(),
-//       };
-//     }
-
-//     try {
-//       const result = await axios(config);
-//       res.json(result);
-//     } catch (err) {
-//       console.error('Error loading locations!', err);
-//       res.sendStatus(500);
-//     }
-//   });
