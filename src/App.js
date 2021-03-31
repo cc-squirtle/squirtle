@@ -6,7 +6,7 @@ import List from './components/List';
 
 function App() {
 
-  const [center, setCenter] = useState("日本");
+  const [center, setCenter] = useState("");
   const [myTaps, setMyTaps] = useState([]);
 
   useEffect(()=> {
