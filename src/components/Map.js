@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+const axios = require('axios');
 
 const dataTable = [
     {
@@ -239,17 +240,35 @@ const dataTable = [
     }
 ]
 
-function handleMouseOver(event) {
-    //console.log(event)
-}
-
-
 export default function Map(props) {
+    const [mapView, setMapView] = useState({});
+
+    useEffect(async ()=> {
+        if (props.center !== "") {
+            const result = await getMapView(props.center) 
+            setMapView(result);
+        } 
+    }, [props.center])
+
+    async function getMapView(center) {
+        try {
+            if (center === "") return;
+            const data = await axios.get(`/geo?str=${center}`)
+            return data.data.results[0];
+        } catch(err) {
+            console.log(err);
+        }
+        
+    }
 
     function handleClicked(tap) {
         console.log("tap clicked", tap);
         props.setMyTaps(prevTaps => [...prevTaps, tap]);
     }
+
+    useEffect(()=> {
+        getMapView(props.center);
+    }, [props.center])
 
     const MyMap = withGoogleMap((props) => (
         <GoogleMap
@@ -263,7 +282,6 @@ export default function Map(props) {
                     position={{lat: tap.latitude, lng: tap.longitude}} 
                     {...tap}
                     onRightClick={() => console.log("tap was clicked")}
-                    onMouseOver={handleMouseOver}
                     onClick={() => handleClicked(tap)}
                 />
             ))}

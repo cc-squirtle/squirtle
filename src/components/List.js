@@ -31,16 +31,16 @@ export default function List(props) {
     props.setMyTaps(props.myTaps.filter((tap) => tap.id !== id));
   }
 
-  return (
-    <div>
-      <h2>List</h2>
-      <button onClick={handleSave}>save</button>
-      <div className="taps-list">
-        {props.myTaps.length &&
-          props.myTaps.map((tap) => (
-            <ListItem tap={tap} handleDelete={handleDelete} />
-          ))}
-      </div>
-    </div>
-  );
+    return (
+        <div>
+            <h2>List</h2>
+            <button
+            onClick={handleSave}>
+                save
+            </button>
+            <div className="taps-list">
+                {props.myTaps.length && props.myTaps.map((tap) => <ListItem tap={tap} handleDelete={handleDelete} />)} 
+            </div>
+        </div>
+    )
 }
