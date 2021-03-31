@@ -15,7 +15,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Map setMyTaps={setMyTaps} />
-      <List myTaps={myTaps} />
+      <List myTaps={myTaps} setMyTaps={setMyTaps}/>
     </div>
   );
 }
