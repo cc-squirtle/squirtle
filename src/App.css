@@ -1,5 +1,14 @@
+html, body {
+  padding: 0px;
+  height: 100%;
+  background-color: #DFEEF5;
+}
+
 .App {
   text-align: center;
+  color: #2C383F;
+  height: 100%;
+  padding-bottom: 25px;
 }
 /* .logo {
   max-width:;
@@ -8,16 +17,20 @@
 
 .map-container {
   height: 500px;
-  width: 100%;
+  width: 95%;
+  margin: 25px auto;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 10px;
 }
 
 .map {
   height: 100%;
+  border-radius: 10px;
 }
 
 .taps-list {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -25,12 +38,66 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   width: 300px;
   margin: 1%;
-}
-
-.tap-card:hover {
-  border: solid orange 2px;
+  border: solid #2D97D1 1px;
+  text-align: left;
 }
 
 .bold-text {
   font-weight: 700;
+}
+
+.navbar {
+  background-color: #2D97D1;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  padding: 1% 3%;
+}
+
+.navbar button {
+  margin-left: 5px;
+  background-color: #FFF;
+  color: #2C383F;
+  border: 1px solid #2C383F;
+}
+
+.navbar button:hover {
+  border: 1px solid #2C383F;
+  background-color: #DFEEF5;
+  color: #2C383F;
+  cursor: pointer;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+
+.logo {
+  fill: #FFF;
+  height: auto;
+  width: auto;
+  max-height: 200px;
+  max-width: 500px;
+}
+
+.button-wrapper {
+  text-align: center;
+}
+
+.blue-button {
+  border: 1px solid #2C383F;
+  background-color: #2D97D1;
+  color: #FFF;
+}
+
+.blue-button:hover {
+  border: 1px solid #2C383F;
+  background-color: #2C383F;
+  color: #FFF;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

@@ -258,7 +258,6 @@ export default function Map(props) {
         } catch(err) {
             console.log(err);
         }
-        
     }
 
     function handleClicked(tap) {
