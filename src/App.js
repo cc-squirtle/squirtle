@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import logo from './logo.svg';
 import './App.css';
 import Navbar　from './components/Navbar';
 import Map from './components/Map';
@@ -8,16 +7,21 @@ import List from './components/List';
 function App() {
 
   const [center, setCenter] = useState("日本");
+  const [myTaps, setMyTaps] = useState([]);
 
   useEffect(()=> {
     console.log("New center ", center);
   }, [center])
+  
+    useEffect(()=> {
+      console.log("tap list", myTaps)
+    }, [myTaps]);
 
   return (
     <div className="App">
       <Navbar setCenter = { setCenter } />
-      <Map center={ center }/>
-      <List />
+      <Map setMyTaps={setMyTaps}  center={ center } />
+      <List myTaps={myTaps} setMyTaps={setMyTaps} />
     </div>
   );
 }
