@@ -258,17 +258,12 @@ export default function Map(props) {
         } catch(err) {
             console.log(err);
         }
-        
     }
 
     function handleClicked(tap) {
         console.log("tap clicked", tap);
         props.setMyTaps(prevTaps => [...prevTaps, tap]);
     }
-
-    useEffect(()=> {
-        getMapView(props.center);
-    }, [props.center])
 
     const MyMap = withGoogleMap((props) => (
         <GoogleMap
