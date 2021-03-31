@@ -402,6 +402,22 @@ export default function Map(props) {
                     {...tap}
                     onRightClick={() => console.log('tap was clicked')}
                     onClick={() => handleClicked(tap)}
+                    icon={{
+                        url:
+                            'https://mt.googleapis.com/vt/icon/name=icons/spotlight/spotlight-poi.png&scale=1',
+                    }}
+                />
+            ))}
+            {props.myTaps.map((tap) => (
+                <Marker
+                    key={tap.id + 'selected'}
+                    id={tap.id + 'selected'}
+                    position={{ lat: tap.latitude, lng: tap.longitude }}
+                    {...tap}
+                    icon={{
+                        url:
+                            'https://mt.google.com/vt/icon?color=ff004C13&name=icons/spotlight/spotlight-waypoint-blue.png&scale=1',
+                    }}
                 />
             ))}
         </GoogleMap>
@@ -414,6 +430,7 @@ export default function Map(props) {
             mapElement={<div className="map" />}
             onMapLoad={() => console.log('map is loaded')}
             setMyProps={props.setMyProps}
+            myTaps={props.myTaps}
         />
     );
 }
