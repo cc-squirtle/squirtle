@@ -1,10 +1,14 @@
 .App {
   text-align: center;
 }
+/* .logo {
+  max-width:;
+  max-height: ;
+} */
 
 .map-container {
   height: 500px;
-  width: 900px;
+  width: 100%;
 }
 
 .map {
