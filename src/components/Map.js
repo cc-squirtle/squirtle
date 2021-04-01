@@ -255,13 +255,13 @@ const defaultMapView = {
                 lng: 154.0031455,
             },
             southwest: {
-                lat: 20.3585295,
+                lat: 35.3585295,
                 lng: 122.8554688,
             },
         },
         location: {
-            lat: 36.204824,
-            lng: 138.252924,
+            lat: 38.204824,
+            lng: 139.252924,
         },
         viewport: {
             northeast: {
@@ -269,8 +269,8 @@ const defaultMapView = {
                 lng: 154.0031455,
             },
             southwest: {
-                lat: 20.3585295,
-                lng: 122.8554688,
+                lat: 40.3585295,
+                lng: 130.8554688,
             },
         },
     },
@@ -286,7 +286,7 @@ function calcZoom(mapView) {
         ) * 90;
     let level =
         kilo > 2500
-            ? 4.75
+            ? 5
             : kilo > 2000
             ? 5
             : kilo > 1000
