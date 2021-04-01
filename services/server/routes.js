@@ -62,7 +62,7 @@ routes.get('/mymizu', async (req, res) => {
     };
 
     const result = await axios(config);
-    console.log(result.data);
+    console.log('routes.get /mymizu result: ', result.data);
     res.json(result.data);
 });
 
