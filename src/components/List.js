@@ -53,7 +53,6 @@ export default function List(props) {
 
   return (
       <div>
-          <h2>My locations</h2>
           <select onChange={handleListChange}>
                 <option value="all">all saved</option>
                 {props.myTaps.length ? getLists().map(list => (
