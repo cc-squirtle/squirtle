@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import ListItem from './ListItem';
 import axios from 'axios';
 
 export default function List(props) {
+
+  useEffect(()=> {
+    if (props.hasChanged) {
+      handleSave();
+    }
+  }, [props.hasChanged])
 
   async function handleSave() {
     props.setHasChanged(false);
@@ -32,14 +38,6 @@ export default function List(props) {
     return (
         <div>
             <h2>My locations</h2>
-            <Button
-                className="blue-button"
-                onClick={handleSave}
-                disabled={!props.hasChanged}
-            >
-                Save
-            </Button>
-            {props.hasChanged ? <p className="warning">You have unsaved changes...</p> : null}
             <div className="taps-list">
                 {props.myTaps.length ? props.myTaps.map((tap) => <ListItem tap={tap} handleDelete={handleDelete}  />) : null } 
             </div>
