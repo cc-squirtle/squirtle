@@ -14,6 +14,7 @@ export default function ListItem(props) {
                         </Card.Text>
                     </div>
                     <div className="button-wrapper">
+                        <Button className="blue-button" onClick={()=> window.open(`https://www.google.com/maps/search/?api=1&query=${props.tap.latitude},${props.tap.longitude}`)} >Open in Maps</Button>
                         <Button className="blue-button" onClick={() => props.handleDelete(props.tap.id)} >Delete</Button>
                     </div>
                 </Card.Body>
