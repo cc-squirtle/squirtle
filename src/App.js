@@ -3,18 +3,20 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Map from './components/Map';
 import List from './components/List';
+import axios from 'axios';
 
 function App() {
     const [center, setCenter] = useState('');
     const [myTaps, setMyTaps] = useState([]);
 
     useEffect(() => {
-        console.log('New center ', center);
-    }, [center]);
+        getMyTaps();
+    }, []);
 
-    useEffect(() => {
-        console.log('tap list', myTaps);
-    }, [myTaps]);
+    async function getMyTaps() {
+        const data = await axios.get('/api/mytaps');
+        setMyTaps(data.data);
+    }
 
     return (
         <div className="App">

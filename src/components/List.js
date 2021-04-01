@@ -9,7 +9,6 @@ export default function List(props) {
       alert('nothing to save');
     }
 
-    // API call to delete current list?
     let saveList = props.myTaps.map((tap) => {
       return {
         mymizu_id: tap.id,
