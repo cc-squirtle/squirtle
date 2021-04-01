@@ -1,28 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import ListItem from './ListItem';
 import axios from 'axios';
 
 export default function List(props) {
-    useEffect(() => {
-        if (props.hasChanged) {
-            handleSave();
-        }
-    }, [props.hasChanged]);
+  const [list, setList] = useState('all');
 
-    async function handleSave() {
-        props.setHasChanged(false);
-        let saveList = props.myTaps.map((tap) => {
-            return {
-                mymizu_id: tap.id,
-                name: tap.name,
-                longitude: tap.longitude,
-                latitude: tap.latitude,
-                address: tap.address,
-                comment: tap.comment,
-                photo_url: tap.photo_url,
-            };
-        });
+  useEffect(()=> {
+    if (props.hasChanged) {
+      handleSave();
+    }
+  }, [props.hasChanged])
+
+  async function handleSave() {
+    props.setHasChanged(false);
+    let saveList = props.myTaps.map((tap) => {
+      return {
+        mymizu_id: tap.id,
+        name: tap.name,
+        longitude: tap.longitude,
+        latitude: tap.latitude,
+        address: tap.address,
+        comment: tap.comment,
+        photo_url: tap.photo_url,
+        list: tap.list
+      };
+    });
 
         // API call to insert list to db...
         let result = await axios.post('/api/mytaps', saveList);
@@ -34,15 +37,36 @@ export default function List(props) {
         props.setHasChanged(true);
     }
 
-    return (
-        <div>
-            <div className="taps-list">
-                {props.myTaps.length
-                    ? props.myTaps.map((tap) => (
-                          <ListItem tap={tap} handleDelete={handleDelete} />
-                      ))
-                    : null}
-            </div>
-        </div>
-    );
+  function getLists() {
+    let mySet = new Set();
+    props.myTaps.forEach(tap => {
+      console.log("inside forEach - tap", tap);
+      mySet.add(tap.list)
+    });
+    console.log("set", mySet);
+    return [...mySet];
+  }
+
+  function handleListChange(event) {
+    setList(event.target.value);
+  }
+
+  return (
+      <div>
+          <h2>My locations</h2>
+          <select onChange={handleListChange}>
+                <option value="all">all saved</option>
+                {props.myTaps.length ? getLists().map(list => (
+                  <option key={list} value={list}>{list}</option>
+                )) : null}
+              </select>
+          <div className="taps-list">
+              {props.myTaps.length ? 
+                (list === 'all' ? 
+                  props.myTaps.map((tap) => <ListItem tap={tap} handleDelete={handleDelete} />) 
+                  : props.myTaps.filter(tap => tap.list === list).map((tap) => <ListItem tap={tap} handleDelete={handleDelete} />) ) 
+                : null } 
+          </div>
+      </div>
+  )
 }
