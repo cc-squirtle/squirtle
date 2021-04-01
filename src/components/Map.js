@@ -390,6 +390,7 @@ export default function Map(props) {
     function handleClicked(tap) {
         console.log('tap clicked', tap);
         props.setMyTaps((prevTaps) => [...prevTaps, tap]);
+        props.setHasChanged(true);
     }
 
     const MyMap = withGoogleMap((props) => (

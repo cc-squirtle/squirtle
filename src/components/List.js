@@ -4,11 +4,9 @@ import ListItem from './ListItem';
 import axios from 'axios';
 
 export default function List(props) {
-  async function handleSave() {
-    if (!props.myTaps.length) {
-      alert('nothing to save');
-    }
 
+  async function handleSave() {
+    props.setHasChanged(false);
     let saveList = props.myTaps.map((tap) => {
       return {
         mymizu_id: tap.id,
@@ -20,7 +18,6 @@ export default function List(props) {
         photo_url: tap.photo_url,
       };
     });
-    console.log(saveList);
 
     // API call to insert list to db...
     let result = await axios.post('/api/mytaps', saveList);
@@ -29,6 +26,7 @@ export default function List(props) {
 
   function handleDelete(id) {
     props.setMyTaps(props.myTaps.filter((tap) => tap.id !== id));
+    props.setHasChanged(true);
   }
 
     return (
@@ -37,11 +35,13 @@ export default function List(props) {
             <Button
                 className="blue-button"
                 onClick={handleSave}
+                disabled={!props.hasChanged}
             >
                 Save
             </Button>
+            {props.hasChanged ? <p className="warning">You have unsaved changes...</p> : null}
             <div className="taps-list">
-                {props.myTaps.length && props.myTaps.map((tap) => <ListItem tap={tap} handleDelete={handleDelete} />)} 
+                {props.myTaps.length ? props.myTaps.map((tap) => <ListItem tap={tap} handleDelete={handleDelete}  />) : null } 
             </div>
         </div>
     )

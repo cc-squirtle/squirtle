@@ -8,6 +8,7 @@ import axios from 'axios';
 function App() {
     const [center, setCenter] = useState('');
     const [myTaps, setMyTaps] = useState([]);
+    const [hasChanged, setHasChanged] = useState(false);
 
     useEffect(() => {
         getMyTaps();
@@ -21,8 +22,8 @@ function App() {
     return (
         <div className="App">
             <Navbar setCenter={setCenter} />
-            <Map setMyTaps={setMyTaps} center={center} myTaps={myTaps} />
-            <List myTaps={myTaps} setMyTaps={setMyTaps} />
+            <Map setMyTaps={setMyTaps} center={center} myTaps={myTaps} setHasChanged={setHasChanged} />
+            <List myTaps={myTaps} setMyTaps={setMyTaps} hasChanged={hasChanged} setHasChanged={setHasChanged} />
         </div>
     );
 }
