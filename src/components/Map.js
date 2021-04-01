@@ -5,6 +5,7 @@ const axios = require('axios');
 const defaultTable = [
     {
         id: 47311,
+        list: 'japan', 
         name: 'Roppongi station',
         longitude: 139.7311884,
         latitude: 35.6644401,
@@ -30,8 +31,8 @@ const defaultTable = [
     },
     {
         id: 178372,
-        name:
-            'Site of the Chōshū Domain Edo Mansion / 長州藩主毛利家下屋敷跡碑',
+        list: 'japan', 
+        name: 'Site of the Chōshū Domain Edo Mansion / 長州藩主毛利家下屋敷跡碑',
         longitude: 139.732971,
         latitude: 35.6669649,
         address:
@@ -57,8 +58,8 @@ const defaultTable = [
     },
     {
         id: 197034,
-        name:
-            'Takahashi Korekiyo Memorial Park Fountain 高橋是清翁記念公園内噴水',
+        list: 'japan', 
+        name: 'Takahashi Korekiyo Memorial Park Fountain 高橋是清翁記念公園内噴水',
         longitude: 139.7287382,
         latitude: 35.6740131,
         address: '7 Chome-3-39 Akasaka, Minato City, Tokyo 107-0052',
@@ -82,6 +83,7 @@ const defaultTable = [
     },
     {
         id: 197126,
+        list: 'japan', 
         name: 'Tokyo Garden Terrace Kioicho',
         longitude: 139.7370976,
         latitude: 35.679517,
@@ -108,6 +110,7 @@ const defaultTable = [
     },
     {
         id: 197103,
+        list: 'japan', 
         name: 'Nogizaka Street Corner Space 乃木坂 道路沿い広場内',
         longitude: 139.7303301,
         latitude: 35.6685951,
@@ -132,6 +135,7 @@ const defaultTable = [
     },
     {
         id: 197119,
+        list: 'japan', 
         name: 'Nagatacho GRiD',
         longitude: 140.739605,
         latitude: 35.679827,
@@ -164,6 +168,7 @@ const defaultTable = [
     },
     {
         id: 197211,
+        list: 'japan', 
         name: '港区立一ツ木児童遊園 Minato ward Hitotsugi Childrens Park',
         longitude: 139.7346937,
         latitude: 36.6732341,
@@ -190,6 +195,7 @@ const defaultTable = [
     },
     {
         id: 197212,
+        list: 'japan', 
         name: '一ツ木公園 Hitotsugi Park',
         longitude: 139.533417,
         latitude: 36.8708179,
@@ -216,6 +222,7 @@ const defaultTable = [
     },
     {
         id: 198016,
+        list: 'japan', 
         name: '檜町公園',
         longitude: 138.7327414,
         latitude: 34.6672141,
@@ -371,6 +378,8 @@ export default function Map(props) {
         if (data.data.count === 0) {
             return;
         }
+        data.data.taps.forEach(tap => tap.list = props.center ? props.center.toLowerCase() : 'japan');
+        console.log(data.data.taps)
         return data.data.taps;
     }
 

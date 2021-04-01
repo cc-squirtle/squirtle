@@ -23,7 +23,7 @@ function App() {
         <div className="App">
             <Navbar setCenter={setCenter} />
             <Map setMyTaps={setMyTaps} center={center} myTaps={myTaps} setHasChanged={setHasChanged} />
-            <List myTaps={myTaps} setMyTaps={setMyTaps} hasChanged={hasChanged} setHasChanged={setHasChanged} />
+            <List myTaps={myTaps} setMyTaps={setMyTaps} hasChanged={hasChanged} setHasChanged={setHasChanged} center={center} />
         </div>
     );
 }
