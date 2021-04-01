@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import ListItem from './ListItem';
 import axios from 'axios';
 
 export default function List(props) {
-  async function handleSave() {
-    if (!props.myTaps.length) {
-      alert('nothing to save');
-    }
 
+  useEffect(()=> {
+    if (props.hasChanged) {
+      handleSave();
+    }
+  }, [props.hasChanged])
+
+  async function handleSave() {
+    props.setHasChanged(false);
     let saveList = props.myTaps.map((tap) => {
       return {
         mymizu_id: tap.id,
@@ -20,7 +24,6 @@ export default function List(props) {
         photo_url: tap.photo_url,
       };
     });
-    console.log(saveList);
 
     // API call to insert list to db...
     let result = await axios.post('/api/mytaps', saveList);
@@ -29,19 +32,14 @@ export default function List(props) {
 
   function handleDelete(id) {
     props.setMyTaps(props.myTaps.filter((tap) => tap.id !== id));
+    props.setHasChanged(true);
   }
 
     return (
         <div>
             <h2>My locations</h2>
-            <Button
-                className="blue-button"
-                onClick={handleSave}
-            >
-                Save
-            </Button>
             <div className="taps-list">
-                {props.myTaps.length && props.myTaps.map((tap) => <ListItem tap={tap} handleDelete={handleDelete} />)} 
+                {props.myTaps.length ? props.myTaps.map((tap) => <ListItem tap={tap} handleDelete={handleDelete}  />) : null } 
             </div>
         </div>
     )
