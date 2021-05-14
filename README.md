@@ -16,4 +16,4 @@ Our idea was to allow users to save their favorite taps by adding them to lists.
 [Watch the presentation here](https://youtu.be/vwMpFxsuQgQ?t=1311)
 
 ## Demonstation
-https://user-images.githubusercontent.com/71073481/118238633-b99b6480-b4d3-11eb-9fc5-cea02ec209d1.mp4
+https://user-images.githubusercontent.com/71073481/118240229-b73a0a00-b4d5-11eb-9843-ae5565f0638f.mp4
